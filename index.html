@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      // This is how u send any request from frontend to backend
+      // populateDiv() is not async func so the syntax is harder
+
+      function populateDiv() {
+        const a = document.getElementById("firstNumber").value;
+        const b = document.getElementById("secondNumber").value;
+        //const element = document.getElementById("finalSum");
+        //element.innerHTML = parseInt(a) + parseInt(b);
+        fetch("http://localhost:8080/sum/?a=" + a + "&b=" + b).then(function (
+          response
+        ) {
+          response.text().then(function (ans) {
+            document.getElementById("finalSum").innerHTML = ans;
+          });
+        });
+      }
+
+      // This is how u send any request from frontend to backend
+      // populateDiv2() is async func so the syntax is easier
+
+      async function populateDiv2() {
+        const a = document.getElementById("firstNumber").value;
+        const b = document.getElementById("secondNumber").value;
+
+        const response = await fetch(
+          "http://localhost:8080/sum/?a=" + a + "&b=" + b
+        );
+        const ans = await response.text();
+        document.getElementById("finalSum").innerHTML = ans;
+      }
+    </script>
+  </head>
+  <body>
+    <input
+      id="firstNumber"
+      type="text"
+      placeholder="First number"
+    /><br /><br />
+    <input
+      id="secondNumber"
+      type="text"
+      placeholder="Second number"
+    /><br /><br />
+    <button onclick="populateDiv2()">Calculate sum</button><br /><br />
+    <div id="finalSum"></div>
+  </body>
+</html>
