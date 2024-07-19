@@ -5,6 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script>
+      //once
+      function debouncePopulateDiv() {
+        let timeout;
+        clearTimeout(timeout);
+
+        // Delay the call to populateDiv until ive not been called for 100ms
+        //and i have been called atleast once
+        timeout = setTimeout(function () {
+          populateDiv2();
+        }, 100);
+
+        // How do you cancle a clock
+        //clearTimeout
+      }
+
       // This is how u send any request from frontend to backend
       // populateDiv() is not async func so the syntax is harder
 
@@ -50,7 +65,7 @@
       type="text"
       placeholder="Second number"
     /><br /><br />
-    <button onclick="populateDiv2()">Calculate sum</button><br /><br />
+    <!-- <button onclick="populateDiv2()">Calculate sum</button><br /><br /> -->
     <div id="finalSum"></div>
   </body>
 </html>
